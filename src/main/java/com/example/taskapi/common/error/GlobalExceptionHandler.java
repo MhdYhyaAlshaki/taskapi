@@ -14,17 +14,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import com.example.taskapi.task.TaskNotFoundException;
 import com.example.taskapi.user.DuplicateUserEmailException;
-import com.example.taskapi.user.UserNotFoundException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(TaskNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleNotFound(TaskNotFoundException ex) {
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNotFound(NotFoundException ex) {
         return build(HttpStatus.NOT_FOUND, ex.getMessage(), null);
     }
 
@@ -45,11 +43,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ErrorResponse> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
         return build(HttpStatus.BAD_REQUEST, "Invalid value for: " + ex.getName(), null);
-    }
-
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleUserNotFound(UserNotFoundException ex) {
-        return build(HttpStatus.NOT_FOUND, ex.getMessage(), null);
     }
 
     @ExceptionHandler(DuplicateUserEmailException.class)

@@ -1,6 +1,8 @@
 package com.example.taskapi.task;
 
-public class TaskNotFoundException extends RuntimeException {
+import com.example.taskapi.common.error.NotFoundException;
+
+public class TaskNotFoundException extends NotFoundException {
     public TaskNotFoundException(Long id) {
         super("Task not found with id: " + id);
     }
