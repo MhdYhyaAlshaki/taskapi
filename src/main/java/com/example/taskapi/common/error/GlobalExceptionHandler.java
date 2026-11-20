@@ -45,6 +45,11 @@ public class GlobalExceptionHandler {
         return build(HttpStatus.BAD_REQUEST, "Invalid value for: " + ex.getName(), null);
     }
 
+    @ExceptionHandler(InvalidSortFieldException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidSortField(InvalidSortFieldException ex) {
+        return build(HttpStatus.BAD_REQUEST, ex.getMessage(), null);
+    }
+
     @ExceptionHandler(DuplicateUserEmailException.class)
     public ResponseEntity<ErrorResponse> handleDuplicateUserEmail(DuplicateUserEmailException ex) {
         return build(HttpStatus.CONFLICT, ex.getMessage(), null);
